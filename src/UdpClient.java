@@ -10,11 +10,11 @@ public class UdpClient {
 		DatagramSocket ds =null;
 		try {
 			ds = new DatagramSocket();
-			byte [] bs = "你好".getBytes();
+			byte [] bs = "exit".getBytes();
 			InetAddress ia = null;
 			try {
 				ia = InetAddress.getLocalHost();
-				DatagramPacket dp = new  DatagramPacket(bs, 0, bs.length, ia, 10000);
+				DatagramPacket dp = new  DatagramPacket(bs, 0, bs.length, ia, 10001);
 				try {
 					ds.send(dp);
 				} catch (IOException e) {

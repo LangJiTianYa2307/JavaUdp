@@ -18,7 +18,7 @@ public class UdpClientAdvance {
 				if("exit".equals(data)) {
 					break;
 				}
-				DatagramPacket dp = new DatagramPacket(data.getBytes(), 0, data.length(), InetAddress.getLocalHost(), 10004);
+				DatagramPacket dp = new DatagramPacket(data.getBytes(), 0, data.getBytes().length, InetAddress.getLocalHost(), 10004);
 				ds.send(dp);
 			}
 		} catch (SocketException e) {

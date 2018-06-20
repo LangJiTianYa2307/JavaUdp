@@ -13,7 +13,7 @@ public class UdpServerAdvance {
 			while(true) {
 				ds.receive(dp);
 				String data = new String(dp.getData(), 0, dp.getLength());
-				System.out.println("服务器接收的数据" + data);
+				System.out.println("服务器接收的数据:	" + data);
  				if("exit".equals(data)) {
 					break;
 				}

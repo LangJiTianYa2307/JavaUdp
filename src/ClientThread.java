@@ -8,10 +8,12 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 
 public class ClientThread extends Thread{
-    private int prot;
+    private int portOfServer;
+    private int portOfClient;
     
-	public ClientThread(int port) {
-		this.prot = port;
+	public ClientThread(int portOfServer,int portOfClient) {
+		this.portOfServer = portOfServer;
+		this.portOfClient = portOfClient;
 	}
 
 	@Override
@@ -29,12 +31,16 @@ public class ClientThread extends Thread{
 			while(true) {
 				//发送数据
 				String data = br.readLine();
-				DatagramPacket dpSend = new DatagramPacket(data.getBytes(), 0, data.getBytes().length, InetAddress.getLocalHost(), this.prot);
-				ds.send(dpSend);
+				//默认使用的是本地的Ip地址
+				DatagramPacket dpSendToServer = new DatagramPacket(data.getBytes(), 0, data.getBytes().length, InetAddress.getLocalHost(), this.portOfClient);
+				//服务器断开连接
+				DatagramPacket dpSendToClient = new DatagramPacket("exit".getBytes(), 0, "exit".getBytes().length, InetAddress.getLocalHost(), this.portOfServer);
+				
 				if("exit".equals(data)) {
-					System.out.println("-------------");
+					ds.send(dpSendToClient);
 					break;
 				}
+				ds.send(dpSendToServer);
 //				System.out.println("发送的数据: " + data);
 			}
 		} catch (SocketException | UnknownHostException e) {

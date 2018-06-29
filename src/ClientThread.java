@@ -37,9 +37,11 @@ public class ClientThread extends Thread{
 				DatagramPacket dpSendToClient = new DatagramPacket("exit".getBytes(), 0, "exit".getBytes().length, InetAddress.getLocalHost(), this.portOfServer);
 				
 				if("exit".equals(data)) {
+					//用于关闭客户端
 					ds.send(dpSendToClient);
 					break;
 				}
+				//发送数据到服务器
 				ds.send(dpSendToServer);
 //				System.out.println("发送的数据: " + data);
 			}

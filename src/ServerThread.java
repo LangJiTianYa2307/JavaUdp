@@ -34,6 +34,7 @@ public class ServerThread extends Thread{
 				ds.receive(dpReceive);
 				String dataReceive = new String(dpReceive.getData(), 0, dpReceive.getData().length);
 				if("exit".equals(dataReceive.substring(0, 4))) {
+					//发送数据到客户端,关闭客户端
 					ds.send(dpSend);
 					break;
 				}
